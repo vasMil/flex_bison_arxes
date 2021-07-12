@@ -1,0 +1,55 @@
+PROGRAM test
+
+%This is my first struct
+STRUCT s1
+VARS
+    CHAR str[20], c;
+    INTEGER i; INTEGER j;
+ENDSTRUCT %the end of my first struct
+
+% My struct may start with an underscore
+%and may also have two names!
+TYPEDEF STRUCT _super_complicated
+VARS
+    _super_complicated part1[2];
+    s1 part2;
+ENDSTRUCT s2
+
+%TODO: do not allow a variable name to be used twice
+FUNCTION func(INTEGER arg1, s2 arg2)
+VARS
+    INTEGER i;
+    s2 struct_f;
+
+%recursive func call
+i = func(i, struct_f);
+
+/* Comment 
+this
+is
+a
+pipe
+*/
+
+%if return a variable must be declared
+RETURN i
+END_FUNCTION
+
+STARTMAIN
+VARS
+    INTEGER maini; CHAR c;
+    IF maini > 1 THEN
+        maini = 9;
+    ELSE
+        maini = 12;
+        c = 12;
+    ENDIF
+
+    WHILE ( 1 )
+        maini = c;
+    ENDWHILE
+
+maini = -20;
+%TODO: maybe accept strings???
+c = func(maini, c);
+ENDMAIN
